@@ -2,3 +2,7 @@
 	path = submodules
 	url = https://github.com/microsoft/azure_arc
 	branch = main
+[submodule "azure-arc-docs"]
+	path = azure-arc-docs
+	url = https://github.com/ewebster-fractal/azure-arc-docs
+	branch = main
