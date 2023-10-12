@@ -1,8 +1,3 @@
-[submodule "submodules"]
-	path = submodules
-	url = https://github.com/microsoft/azure_arc
-	branch = main
-[submodule "azure-arc-docs"]
-	path = azure-arc-docs
+[submodule "arc_jumpstart_docs"]
+	path = arc_jumpstart_docs
 	url = https://github.com/Fractal-IOTFAL/arc_jumpstart_docs
-	branch = main
