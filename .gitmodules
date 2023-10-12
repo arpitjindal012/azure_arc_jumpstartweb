@@ -4,5 +4,5 @@
 	branch = main
 [submodule "azure-arc-docs"]
 	path = azure-arc-docs
-	url = https://github.com/ewebster-fractal/azure-arc-docs
+	url = https://github.com/Fractal-IOTFAL/arc_jumpstart_docs
 	branch = main
