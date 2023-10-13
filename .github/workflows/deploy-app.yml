@@ -40,6 +40,8 @@ jobs:
           npm run fetch-docs
           npm install
           npm run build
+        env:
+          CI: ""
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
