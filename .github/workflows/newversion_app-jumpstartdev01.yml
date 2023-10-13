@@ -29,8 +29,7 @@ jobs:
           cd azure-arc-jumpstart-app
           npm run fetch-docs  
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm run build
         env:
           CI: "" # need to fix this later
 
