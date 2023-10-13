@@ -17,20 +17,17 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
-          lfs: false
-          
-      - name: Get Latest Docs
-        run: |
-          cd azure-arc-jumpstart-app
-          npm run fetch-docs       
+          lfs: false 
 
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
           node-version: '18.x'
-
+          
       - name: npm install, build, and test
         run: |
+          cd azure-arc-jumpstart-app
+          npm run fetch-docs  
           npm install
           npm run build --if-present
           npm run test --if-present
