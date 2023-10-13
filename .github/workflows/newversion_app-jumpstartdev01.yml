@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: iotfal-selfhosted
 
     steps:
       - uses: actions/checkout@v3
@@ -43,7 +43,7 @@ jobs:
           path: release.zip
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: iotfal-selfhosted
     needs: build
     environment:
       name: 'Production'
