@@ -41,7 +41,7 @@ jobs:
           npm install
           npm run build
         env:
-          CI: ""
+          CI: "" # need to fix this later
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
