@@ -4,7 +4,8 @@ on:
   repository_dispatch:
     types:
       - workflow-trigger  # Use the same custom event name as in Repository A
-
+  push:
+    branches: ["newversion"]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
