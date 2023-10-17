@@ -1,100 +1,81 @@
+import React, { useEffect, useState } from "react";
 import "./MenuDrawer.css";
+import MenuCard from "./MenuCard";
+import SubMenuItem from "./SubMenuItem";
 
-const MenuDrawer = ({ ...props }) => {
+const MenuDrawer = ({ menuItem }) => {
+  const [subMenuItems, setSubMenuItems] = useState([]);
+  const [selectedSubMenuItem, setSelectedSubMenuItem] = useState(null);
+  const [selectedMenuCard, setSelectedMenuCard] = useState(null);
+
+  useEffect(() => {
+    if (menuItem && menuItem.Items && menuItem.Items.length > 0) {
+      setSubMenuItems(menuItem.Items);
+      setSelectedSubMenuItem(menuItem.Items[0]);
+      setSelectedMenuCard(null);
+    } else {
+      setSubMenuItems([]);
+      setSelectedSubMenuItem(null);
+      setSelectedMenuCard(null);
+    }
+  }, [menuItem]);
+
+  const handleOnClick = (menuItem) => {
+    setSelectedSubMenuItem(menuItem);
+    setSelectedMenuCard(null);
+  };
+
   return (
     <div className="frame-2018775984">
       <div className="sub-menu">
-        <div className="tab-line"></div>
         <div className="sub-menu-body">
-          <div className="sub-menu-items">
-            <div className="overview">Overview </div>
-          </div>
-          <div className="sub-menu-items">
-            <div className="overview2">Jumpstart Scenarios </div>
-          </div>
-          <div className="sub-menu-items">
-            <div className="overview2">Additional resources </div>
-          </div>
-          <div className="sub-menu-items">
-            <div className="overview2">About </div>
-          </div>
+          {
+            subMenuItems.map((subMenuItem, index) => {
+              return (
+                <SubMenuItem
+                  isSelected={selectedSubMenuItem === subMenuItem}
+                  onClick={() => handleOnClick(subMenuItem)}
+                >
+                  {subMenuItem.Title}
+                </SubMenuItem>
+              )
+            })
+          }
         </div>
       </div>
       <div className="frame-2018775955">
         <div className="frame-2018775954">
-          <div className="frame-59895">
-            <div className="overview3">Overview </div>
-            <div className="view-all">View all </div>
-          </div>
-          <div className="description">
-            The goal of the repo is for you to have a working Azure Arc demo
-            environment spun up in no-time so you can focus on playing, demoing,
-            upskilling yourself and your team and see the core values of Azure
-            Arc. Explore our different Jumpstart products.{" "}
-          </div>
+          {
+            selectedSubMenuItem && (
+              <>
+                <div className="frame-59895">
+                  <div className="overview3">
+                    {selectedSubMenuItem.Title}
+                  </div>
+                  <div className="view-all">View all </div>
+                </div>
+                <div className="description">
+                  {selectedSubMenuItem.Description}
+                </div>
+              </>
+            )
+          }
         </div>
         <div className="frame-59653">
           <div className="row-1">
-            <div className="nav-bar-cards-dark-mode">
-              <div className="card">
-                <div className="header">
-                  <div className="text">
-                    <div className="object-counting">Jumpstart Solutions </div>
-                  </div>
-                </div>
-                <div className="detect-and-count-objects-or-people">
-                  Accelerate your deployment with our Jumpstart solutions.{" "}
-                </div>
-              </div>
-            </div>
-            <div className="nav-bar-cards-dark-mode">
-              <div className="card">
-                <div className="header">
-                  <div className="text">
-                    <div className="object-counting">Jumpstart Agora </div>
-                  </div>
-                </div>
-                <div className="detect-and-count-objects-or-people">
-                  Collection of industry verticals from cloud to edge scenarios.{" "}
-                </div>
-              </div>
-            </div>
-            <div className="nav-bar-cards-dark-mode">
-              <div className="card">
-                <div className="header">
-                  <div className="text">
-                    <div className="object-counting">Jumpstart ArcBox </div>
-                  </div>
-                </div>
-                <div className="detect-and-count-objects-or-people">
-                  Explore Azure Arc capabilities with Azure Sandbox.{" "}
-                </div>
-              </div>
-            </div>
-            <div className="nav-bar-cards-dark-mode">
-              <div className="card">
-                <div className="header">
-                  <div className="text">
-                    <div className="object-counting">Jumpstart HCIBox </div>
-                  </div>
-                </div>
-                <div className="detect-and-count-objects-or-people">
-                  Explore Azure Stack HCI capabilities with Azure Sandbox.{" "}
-                </div>
-              </div>
-            </div>
-            <div className="nav-bar-cards-dark-mode">
-              <div className="card">
-                <div className="header">
-                  <div className="text">
-                    <div className="object-counting">Jumpstart Lightning </div>
-                  </div>
-                </div>
-                <div className="detect-and-count-objects-or-people">
-                  Watch our show where people share their stories.{" "}
-                </div>
-              </div>
-            </div>
+            {
+              selectedSubMenuItem && selectedSubMenuItem.Items.map((item, index) => {
+                return (
+                  <MenuCard
+                    label={item.Title}
+                    selectedMenuCard={selectedMenuCard}
+                    setSelectedMenuCard={setSelectedMenuCard}
+                  >
+                    {item.Description}
+                  </MenuCard>
+                )
+              })
+            }
           </div>
         </div>
       </div>
