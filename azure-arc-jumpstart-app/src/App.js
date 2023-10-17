@@ -46,18 +46,19 @@ const App = () => {
   const handleFileFetch = (pagePath) => {
     const pagePathSplit = pagePath.split('#');
     setMarkdownFilePath(pagePathSplit);
-    getDoc();
+    getDoc(pagePathSplit);
   }
 
-  const getDoc = async () => {
+  const getDoc = async (path) => {
     try {
-      let fullPath = markdownFilePath[0] === '' ? './docs/_index.md' : `./docs/${markdownFilePath[0]}/_index.md`;
-      if (markdownFilePath.length > 1) {
-        fullPath = `${fullPath}#${markdownFilePath[1]}`;
+      let fullPath = path[0] === '' ? './docs/_index.md' : `./docs/${path[0]}/_index.md`;
+      if (path.length > 1) {
+        fullPath = `${fullPath}#${path[1]}`;
       }
       const res = await fetch(fullPath);
       const doc = await res.text();
-      setMarkdownFileContents(removeFrontmatter(doc));
+      const htmlText = removeFrontmatter(doc);
+      setMarkdownFileContents(htmlText);
     } catch (e) {
       console.log(e);
     }
@@ -107,7 +108,7 @@ const App = () => {
         {
           sideMenuItems && sideMenuItems.length > 0 && (
             <SideMenu
-              sideMenuItems={sideMenuItems[0].children}
+              sideMenuItems={sideMenuItems}
               handleFileFetch={handleFileFetch}
             />
           )
@@ -120,14 +121,21 @@ const App = () => {
           />
         ) : (
           <>
-            <BreadcrumbBar />
+            <BreadcrumbBar path={markdownFilePath} />
             <span style={{ position: 'absolute', top: '48px', right: '71px' }}>
               <Dropdown>Jump to section</Dropdown>
             </span>
           </>
         )
       }
-      <span style={{ position: 'absolute', top: '96px', left: '300px', color: 'white' }}>
+      <span
+        style={{
+          position: 'absolute',
+          top: '96px',
+          left: '300px',
+          right: '0px',
+          color: 'white'
+        }}>
         <Doc
           doc={markdownFileContents}
           path={markdownFilePath}
