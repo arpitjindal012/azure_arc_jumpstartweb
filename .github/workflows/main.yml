@@ -33,7 +33,6 @@ jobs:
         run:  |
           cd azure-arc-jumpstart-app
           npm install
-          npm run fetch-docs
           CI=false npm run build
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
