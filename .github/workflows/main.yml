@@ -1,7 +1,9 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Trigger Github pages workflow
+name: Repository dispatch trigger and Building the app
 
 on:
+  repository_dispatch:
+    types:
+      - workflow-trigger
   # Runs on pushes targeting the default branch
   push:
     branches: ["newversion"]
@@ -28,30 +30,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: NPM commands
-        run: |
+      - name: Build
+        run:  |
           cd azure-arc-jumpstart-app
-          npm ci
+          npm install
           npm run fetch-docs
           CI=false npm run build
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
-          source: ./azure-arc-jumpstart-app/
-          destination: ./_site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+          branch: gh-pages # Target branch to deploy to
+          folder: ./azure-arc-jumpstart-app/build # Folder (or path) containing your app's build artifacts
+          clean: true # Automatically remove old files from the deployment branch
+          token: ${{ secrets.gh_pat }}
