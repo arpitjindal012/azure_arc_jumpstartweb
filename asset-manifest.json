@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/azure_arc_jumpstartweb/static/css/main.42e50bde.css",
+    "main.js": "/azure_arc_jumpstartweb/static/js/main.24b07535.js",
+    "static/js/787.f8ae4864.chunk.js": "/azure_arc_jumpstartweb/static/js/787.f8ae4864.chunk.js",
+    "index.html": "/azure_arc_jumpstartweb/index.html",
+    "main.42e50bde.css.map": "/azure_arc_jumpstartweb/static/css/main.42e50bde.css.map",
+    "main.24b07535.js.map": "/azure_arc_jumpstartweb/static/js/main.24b07535.js.map",
+    "787.f8ae4864.chunk.js.map": "/azure_arc_jumpstartweb/static/js/787.f8ae4864.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.42e50bde.css",
+    "static/js/main.24b07535.js"
+  ]
+}

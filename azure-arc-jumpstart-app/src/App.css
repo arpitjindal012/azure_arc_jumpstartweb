@@ -1,5 +1,0 @@
-@import './components/Vars.css';
-
-body {
-  background-color: var(--neutral-background-4-rest);
-}
