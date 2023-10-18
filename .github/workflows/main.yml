@@ -36,6 +36,10 @@ jobs:
           npm install
           npm run fetch-docs
           CI=false npm run build
+      - name: Configure git
+        run: |
+          git config --global user.name "arpitjindal012"
+          git config --global user.email "arpit.jindal@fractal.ai"
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
