@@ -31,7 +31,6 @@ jobs:
       - name: NPM commands
         run: |
           cd azure-arc-jumpstart-app
-          npm install gh-pages --save-dev
           npm ci
           npm run fetch-docs
           CI=false npm run build
