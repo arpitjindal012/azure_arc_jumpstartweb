@@ -44,12 +44,13 @@ const Doc = ({ doc, path, handleFileFetch, gatherElementIds }) => {
         console.log(path);
         if(path.length > 1) {
             const hash = path[1]; // Remove the '#'
-            console.log(hash);
             const targetElement = document.getElementById(hash);
     
             if (targetElement) {
                 targetElement.scrollIntoView({ behavior: 'smooth' });
             }
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         gatherElementIds();
     }, [path]);

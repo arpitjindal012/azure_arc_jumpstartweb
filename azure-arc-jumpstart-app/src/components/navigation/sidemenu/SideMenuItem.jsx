@@ -5,7 +5,10 @@ export const SideMenuItem = ({ sideMenuItem, offset, handleFileFetch }) => {
     const [open, setOpen] = useState(false);
 
     const handleClick = () => {
-        sideMenuItem.children.length > 0 ? setOpen(!open) : handleFileFetch(sideMenuItem.path);
+        setOpen((prev) => {
+            handleFileFetch(sideMenuItem.path);
+            return !prev;
+        });
     };
 
     return (
@@ -55,7 +58,9 @@ export const SideMenuItem = ({ sideMenuItem, offset, handleFileFetch }) => {
                 </div>
             </div>
             {
-                open && sideMenuItem.hasOwnProperty('children') && sideMenuItem.children.filter((item) => item.frontMatter).map((item, index) => {
+                open && sideMenuItem.hasOwnProperty('children') && sideMenuItem.children.filter((item) => {
+                    return item.frontMatter && item.frontMatter.toc_hide !== true;
+                }).map((item, index) => {
                     return (
                         <SideMenuItem sideMenuItem={item} key={index} offset={offset + 10} handleFileFetch={handleFileFetch}/>
                     )
