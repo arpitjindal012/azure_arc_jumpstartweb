@@ -1,4 +1,4 @@
-name: Repository dispatch trigger and Building the app
+name: Repository dispatch trigger and Building
 
 on:
   repository_dispatch:
