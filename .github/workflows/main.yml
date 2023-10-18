@@ -44,8 +44,8 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
-                  branch: gh-pages # Target branch to deploy to
-                  folder: ./azure-arc-jumpstart-app/build # Folder (or path) containing your app's build artifacts
-                  clean: true # Automatically remove old files from the deployment branch
-                  token: ${{ secrets.gh_pat }}
+          branch: gh-pages # Target branch to deploy to
+          folder: ./azure-arc-jumpstart-app/build # Folder (or path) containing your app's build artifacts
+          clean: true # Automatically remove old files from the deployment branch
+          token: ${{ secrets.gh_pat }}
   
