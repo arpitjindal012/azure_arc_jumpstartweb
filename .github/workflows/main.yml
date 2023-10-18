@@ -40,10 +40,13 @@ jobs:
         run: |
           git config --global user.name "arpitjindal012"
           git config --global user.email "arpit.jindal@fractal.ai"
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          branch: gh-pages # Target branch to deploy to
-          folder: ./azure-arc-jumpstart-app/build # Folder (or path) containing your app's build artifacts
-          clean: true # Automatically remove old files from the deployment branch
-          token: ${{ secrets.gh_pat }}
+  deploy:
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+      runs-on: ubuntu-latest
+      needs: build
+      steps:
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v2
